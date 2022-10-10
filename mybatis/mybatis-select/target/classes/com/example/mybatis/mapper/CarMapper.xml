@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.CarMapper">
+    <select id="selectById" resultMap="carResultMap">
+        select *
+        from t_car
+        where id=#{id}
+    </select>
+
+    <select id="selectAll" resultType="Car">
+        select id,
+               car_num as carNum,
+               brand,
+               guide_price as guidePrice,
+               produce_time as produceTime,
+               car_type as carType
+        from t_car
+    </select>
+
+    <select id="selectByBrandLike" resultType="Car">
+        select id,
+               car_num as carNum,
+               brand,
+               guide_price as guidePrice,
+               produce_time as produceTime,
+               car_type as carType
+        from t_car where brand like "%"#{brand}"%"
+    </select>
+
+    <!--resultType 为Map-->
+    <select id="selectByIdRetMap" resultType="Map">
+        select * from t_car where id=#{id}
+    </select>
+
+    <select id="selectAllRetMapList" resultType="Map">
+        select * from t_car
+    </select>
+
+    <select id="selectAllRetMapIdAsKey" resultType="Map">
+        select * from t_car
+    </select>
+
+    <!--
+        定义一个结果映射，在这个结果映射当中指定数据库字段名和Java对象属性名的对应关系
+        type: 用来指定pojo类的类名
+        id: 自定resultMap的唯一标识
+    -->
+    <resultMap id="carResultMap" type="Car">
+        <!--
+            property: pojo类的属性名
+            column: 数据库表的字段名
+            | id | car_num | brand    | guide_price | produce_time | car_type |
+            如果property和column是一样的，映射可以省略
+        -->
+        <!--如果数据库表中有主键，建议配置一个id标签-->
+        <id property="id" column="id"/>
+        <result property="carNum" column="car_num"/>
+        <result property="brand" column="brand"/>
+        <result property="guidePrice" column="guide_price"/>
+        <result property="produceTime" column="produce_time"/>
+        <result property="carType" column="car_type"/>
+
+    </resultMap>
+
+    <select id="selectAllByResultMap" resultMap="carResultMap">
+        select * from t_car
+    </select>
+
+    <select id="selectAllByMapUnderscoreToCamelCase" resultType="Car">
+        select * from t_car
+    </select>
+
+    <select id="getTotal" resultType="long">
+        select count(*) from t_car
+    </select>
+</mapper>

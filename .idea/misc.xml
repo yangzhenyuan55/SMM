@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/mvc/bank-mvc-001" />
+    <file type="web" url="file://$PROJECT_DIR$/mybatis/mybatis-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/spring-helloworld/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-ioc-xml/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-ioc-annotation/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-proxy/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-aop/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-orm/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-introduction/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-crud/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-configuration/pom.xml" />
+        <option value="$PROJECT_DIR$/parse-xml-by-dom4j/pom.xml" />
+        <option value="$PROJECT_DIR$/java8-new-features/pom.xml" />
+        <option value="$PROJECT_DIR$/mvc/bank-mvc-001/pom.xml" />
+        <option value="$PROJECT_DIR$/mvc/bank-mvc-002/pom.xml" />
+        <option value="$PROJECT_DIR$/mvc/threadlocal/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-web/pom.xml" />
+        <option value="$PROJECT_DIR$/javassist-test/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-crud-by-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-tips/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-param/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-select/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-auto-sql/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-advanced-mapping/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/spring/pom.xml" />
+        <option value="$PROJECT_DIR$/spring/spring-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis/mybatis-advanced-mapping/pom.xml" />
+        <option value="$PROJECT_DIR$/javase/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/mybatis/mybatis-test/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis/untitled/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jdk-11.0.15.1" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

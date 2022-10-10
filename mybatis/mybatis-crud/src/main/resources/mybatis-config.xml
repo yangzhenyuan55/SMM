@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--MyBatis 中极为重要的调整设置，它们会改变 MyBatis 的运行时行为-->
+    <!--首先来集成以下日志组件-->
+    <!--<settings>-->
+        <!--使用MyBatis自己实现的日志组件-->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+
+        <!--使用logback日志组件-->
+        <!--
+        在使用STDOUT_LOGGING的时候需要进行配置，但是使用其他的日志框架的时候就不需要在此进行配置了，
+        因为未进行指定的时候，会自动查找，当我们的依赖种有其他的日志框架的时候，会自动调用
+        -->
+        <!--<setting name="logImpl" value="SLF4J"/>-->
+    <!--</settings>-->
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/powernode?serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="20160910yzy"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--指定Mapper文件路径，resource属性会自动从根路径下查找资源-->
+        <mapper resource="CarMapper.xml"/>
+    </mappers>
+</configuration>

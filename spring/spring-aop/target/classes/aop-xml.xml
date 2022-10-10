@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--扫描包中的bean组件-->
+    <context:component-scan base-package="com.example.spring.aop.xml"/>
+
+
+    <!--基于XML的AOP配置-->
+    <aop:config>
+        <!--设置切入点表达式-->
+        <aop:pointcut id="pointCut" expression="execution(* com.example.spring.aop.xml.Calculator.*(..))"/>
+        <!--将IOC容器中的bean设置为切面，component-scan已经将LoggerAspect类扫描到容器中，默认的id为其类名的小驼峰写法-->
+        <aop:aspect ref="loggerAspect">
+            <!--将切面中的方法设置为通知-->
+            <!--前置通知-->
+            <aop:before method="afterAdviceMethod" pointcut-ref="pointCut"/>
+            <aop:after-returning method="afterReturningAdviceMethod" pointcut-ref="pointCut" returning="result"/>
+            <aop:after method="afterAdviceMethod" pointcut-ref="pointCut"/>
+            <aop:after-throwing method="afterThrowingAdviceMethod" pointcut-ref="pointCut" throwing="exception"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

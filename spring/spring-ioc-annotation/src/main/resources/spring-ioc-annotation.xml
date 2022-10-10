@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--扫描组件-->
+    <context:component-scan base-package="com.example.spring" >
+        <!--
+            exclude-filter标签：将指定类型的类排除在外，不扫描此指定类型
+            include-filter标签：只扫描指定的类型
+        -->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+
+        <!--
+            设置只扫描的时候，需要将过滤规则，use-default-filters的属性改为false，要不然还是会全部扫描
+
+            use-default-filters="true"：所设置的包下所有的类都需要扫描，此时可以使用排除扫描，但是不能使用包含扫描
+            use-default-filters="false"：所设置的包下所有的类都不需要扫描，此时可以使用包含扫描
+
+        -->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+    </context:component-scan>
+
+
+
+</beans>

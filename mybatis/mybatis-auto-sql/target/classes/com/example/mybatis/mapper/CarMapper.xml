@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.CarMapper">
+
+    <insert id="insertBatch">
+        insert into t_car values
+        <foreach collection="cars" item="car" separator=",">
+            (null,#{car.carNum},#{car.brand},#{car.guidePrice},#{car.produceTime},#{car.carType})
+        </foreach>
+    </insert>
+
+    <delete id="deleteById">
+        delete from t_car where id in (
+            <foreach collection="ids" item="id" separator=",">
+                #{id}
+            </foreach>
+        )
+    </delete>
+
+    <update id="update">
+        update t_car
+        <set>
+            <if test="carNum != null and carNum != ''">car_num = #{carNum},</if>
+            <if test="brand != null and brand != ''">brand = #{brand},</if>
+            <if test="guidePrice != null and guidePrice != ''">guide_price = #{guidePrice},</if>
+            <if test="produceTime != null and produceTime != ''">produce_time = #{produceTime},</if>
+            <if test="carType != null and carType != ''">car_type = #{carType}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="selectByMultiCondition" resultType="Car">
+        select * from t_car where 1=1
+        <if test="brand != null and brand != ''">
+            and brand like "%"#{brand}"%"
+        </if>
+        <if test="guidePrice != null and guidePrice != ''">
+            and guide_price > #{guidePrice}
+        </if>
+        <if test="carType != null and carType != ''">
+            and car_type = #{carType}
+        </if>
+    </select>
+
+    <select id="selectByMultiConditionWithWhere" resultType="Car">
+        select * from t_car
+        <where>
+            <if test="brand != null and brand != ''">
+                brand like "%"#{brand}"%"
+            </if>
+            <if test="guidePrice != null and guidePrice != ''">
+                and guide_price > #{guidePrice}
+            </if>
+            <if test="carType != null and carType != ''">
+                and car_type = #{carType}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByMultiConditionWithTrim" resultType="Car">
+        select * from t_car
+        <trim prefix="where" suffixOverrides="and">
+            <if test="brand != null and brand != ''">
+                brand like "%"#{brand}"%" and
+            </if>
+            <if test="guidePrice != null and guidePrice != ''">
+                guide_price > #{guidePrice} and
+            </if>
+            <if test="carType != null and carType != ''">
+                car_type = #{carType}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectByChoose" resultType="Car">
+        select * from t_car
+        <where>
+            <choose>
+                <when test="brand != null and brand != ''">brand like "%"#{brand}"%"</when>
+                <when test="guidePrice != null and guidePrice != ''">guide_price > #{guidePrice}</when>
+                <when test="carType != null and carType != ''">car_type = #{carType}</when>
+            </choose>
+        </where>
+    </select>
+</mapper>
+

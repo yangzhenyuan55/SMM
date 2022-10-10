@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="studentOne" class="com.example.spring.pojo.Student"/>
+
+
+
+    <!--依赖注入: set注入-->
+    <!--如果想将其中一个参数赋值为null，不能直接在value中直接写，需要在property标签中添加一个<null> 标签-->
+    <bean id="studentTwo" class="com.example.spring.pojo.Student">
+        <property name="sid" value="1001"/>
+        <property name="sname" value="张三"/>
+        <property name="sage" value="25"/>
+        <property name="gender">
+            <null/>
+        </property>
+    </bean>
+
+    <!--依赖注入：构造器注入-->
+    <bean id="studentThree" class="com.example.spring.pojo.Student">
+        <constructor-arg value="1002"/>
+        <constructor-arg value="李四"/>
+        <constructor-arg value="45"/>
+        <constructor-arg value="女"/>
+    </bean>
+
+    <!--成员变量是对象，进行依赖注入-->
+
+    <!--使用ref属性为Clazz对象赋值，其中clazzOne是容器内部的bean-->
+    <bean id="studentFour" class="com.example.spring.pojo.Student">
+        <property name="sid" value="1003"/>
+        <property name="sname" value="王五"/>
+        <property name="sage" value="25"/>
+        <property name="gender" value="男"/>
+        <property name="clazz" ref="clazzOne"/>
+    </bean>
+
+    <!--通过级联的方式来为成员变量(成员变量是对象)赋值-->
+    <bean id="studentFive" class="com.example.spring.pojo.Student">
+        <property name="sid" value="1003"/>
+        <property name="sname" value="王五"/>
+        <property name="sage" value="25"/>
+        <property name="gender" value="男"/>
+        <!--通过级联来赋值的时候必须要通过ref指定实例对象-->
+        <property name="clazz" ref="clazzOne"/>
+        <property name="clazz.cid" value="1111"/>
+        <property name="clazz.cname" value="基础班"/>
+    </bean>
+
+    <!--使用内部bean来对对象类型的成员变量赋值-->
+    <bean id="studentSix" class="com.example.spring.pojo.Student">
+        <property name="sid" value="1004"/>
+        <property name="sname" value="赵四"/>
+        <property name="sage" value="25"/>
+        <property name="gender" value="男"/>
+        <property name="clazz">
+            <bean class="com.example.spring.pojo.Clazz">
+                <property name="cid" value="1111"/>
+                <property name="cname" value="基础班"/>
+            </bean>
+        </property>
+    </bean>
+
+
+    <!--成员变量是一个List对象，使用list标签-->
+    <!--如果成员变量是一个数组，那么则使用array标签-->
+    <bean id="clazzOne" class="com.example.spring.pojo.Clazz">
+        <property name="cid" value="1111"/>
+        <property name="cname" value="基础班"/>
+        <property name="students">
+            <list>
+                <ref bean="studentOne"/>
+                <ref bean="studentTwo"/>
+                <ref bean="studentThree"/>
+            </list>
+        </property>
+    </bean>
+
+
+
+    <!--如果想直接使用ref属性直接指向List集合那么需要使用util的约束来实现-->
+    <bean id="clazzTwo" class="com.example.spring.pojo.Clazz">
+        <property name="cid" value="2222"/>
+        <property name="cname" value="基础班"/>
+        <property name="students" ref="studentList"/>
+    </bean>
+
+    <util:list id="studentList">
+        <ref bean="studentOne"/>
+        <ref bean="studentTwo"/>
+        <ref bean="studentThree"/>
+    </util:list>
+
+    <!--
+        由上面List集合的形式，可以类比出Map集合的注入形式
+        Map集合使用entry标签来进行属性的注入-
+    -->
+
+</beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    bean 的作用域
+    scope:设置bean的作用域
+    singleton: 表示获取bean的对象是单例的
+    prototype: 表示获取bean的对象是多例的
+    -->
+    <bean id="student" class="com.example.spring.pojo.Student" scope="prototype">
+        <property name="sid" value="1001"/>
+        <property name="sname" value="张三"/>
+    </bean>
+</beans>

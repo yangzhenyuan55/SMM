@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.ClazzMapper">
+
+    <resultMap id="clazzMapperByStep2" type="Clazz">
+        <id property="cid" column="cid"/>
+        <result property="cname" column="cname"/>
+    </resultMap>
+    <select id="selectByIdStep2" resultMap="clazzMapperByStep2">
+        select cid,cname from t_clazz where cid=#{cid}
+    </select>
+
+    <resultMap id="clazzResultMapByCollection" type="Clazz">
+        <id property="cid" column="cid"/>
+        <result property="cname" column="cname"/>
+        <collection property="studentList" ofType="Student">
+            <id property="sid" column="sid"/>
+            <result property="sname" column="sname"/>
+        </collection>
+    </resultMap>
+    <select id="selectByCollection" resultMap="clazzResultMapByCollection">
+        select c.cid,c.cname,s.sid,s.sname from t_clazz c left join t_stu s on c.cid = s.cid where c.cid=#{cid}
+    </select>
+
+    <resultMap id="clazzResultMapByStep" type="Clazz">
+        <id property="cid" column="cid"/>
+        <result property="cname" column="cname"/>
+        <collection property="studentList" select="com.example.mybatis.mapper.StudentMapper.selectByIdWithStep" column="cid"/>
+    </resultMap>
+    <select id="selectByIdWithStep" resultMap="clazzResultMapByStep">
+        select cid,cname from t_clazz where cid=#{cid}
+    </select>
+
+</mapper>

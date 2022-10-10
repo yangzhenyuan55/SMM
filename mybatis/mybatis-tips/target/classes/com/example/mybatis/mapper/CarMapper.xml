@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.CarMapper">
+    <!-- id | car_num | brand     | guide_price | produce_time | car_type-->
+    <insert id="insert">
+        insert into t_car(id,car_num,brand,guide_price,produce_time,car_type)
+        values(null,#{carNum},#{brand},#{guidePrice},#{produceTime},#{carType})
+    </insert>
+
+    <insert id="insertCarUseGeneratedKeys" useGeneratedKeys="true" keyProperty="id">
+        insert into t_car values(null,#{carNum},#{brand},#{guidePrice},#{produceTime},#{carType})
+    </insert>
+
+    <delete id="deleteById">
+        delete from t_car where id=#{id}
+    </delete>
+
+    <delete id="deleteBatch">
+        delete from t_car where id in(${ids})
+    </delete>
+
+    <update id="update">
+        update t_car set car_num=#{carNum},brand=#{brand},guide_price=#{guidePrice},produce_time=#{produceTime},car_type=#{carType} where id=#{id}
+    </update>
+
+    <select id="selectById" resultType="Car">
+        select id,car_num as carNum,brand,guide_price as guidePrice,produce_time as produceTime,car_type as carType from t_car where id=#{id}
+    </select>
+
+    <select id="selectAllCar" resultType="Car">
+        select id,car_num as carNum,brand,guide_price as guidePrice,produce_time as produceTime,car_type as carType from t_car
+    </select>
+
+    <select id="selectByType" resultType="Car">
+        select id,
+               car_num as carNum,
+               brand,
+               guide_price as guidePrice,
+               produce_time as produceTime,
+               car_type as carType
+        from t_car
+        where car_type=#{carType}
+    </select>
+
+    <select id="selectAllOrderByProduceTime" resultType="Car">
+        select id,
+               car_num as carNum,
+               brand,
+               guide_price as guidePrice,
+               produce_time as produceTime,
+               car_type as carType
+        from t_car
+        order by produceTime ${ascOrDesc}
+    </select>
+
+    <select id="selectByBrandLike" resultType="Car">
+        select id,
+               car_num as carNum,
+               brand,
+               guide_price as guidePrice,
+               produce_time as produceTime,
+               car_type as carType
+        /*from t_car where brand like '%${brand}%'*/
+        from t_car where brand like "%"#{brand}"%"
+    </select>
+
+
+</mapper>
