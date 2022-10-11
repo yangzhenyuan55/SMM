@@ -64,7 +64,7 @@ public class WaitAndNotifyMethod {
                     }
 
                     // 容量为1，大于0相当于容量满了
-                    if (storehouse.size() > 9) {
+                    if (storehouse.size() > 1) {
                         // 当容量满了就不生产了
                         // 等待一下
                         try {
