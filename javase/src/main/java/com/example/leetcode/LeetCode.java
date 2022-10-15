@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * @Author: yzy
@@ -13,7 +14,7 @@ import java.util.Map;
  */
 public class LeetCode {
     public static void main(String[] args) {
-        List<List<Integer>> combine = new LeetCode().combine(4, 2);
+        List<List<Integer>> combine = new LeetCode().combinationSum3(3, 7);
         System.out.println(combine);
 
 
@@ -66,32 +67,38 @@ public class LeetCode {
         }
     }
 
-    List<List<Integer>> res = new ArrayList<>();
-    List<Integer> path = new ArrayList<>();
+    private List<List<Integer>> res = new ArrayList<>();
+    private Stack<Integer> path = new Stack<>();
 
-    public List<List<Integer>> combine(int n, int k) {
-
-        backtracking(n, k, 1);
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        dfs(k, n, 1, 0);
         return res;
     }
 
-    void backtracking(int n, int k, int startIndex) {
-        if (path.size() + (n - startIndex + 1) < k) {
+
+    private void dfs(int k, int n, int cur, int sum) {
+        if(path.size() > k) {
             return;
         }
 
-        if (path.size() == k) {
+        if(sum == n && path.size() == k) {
             res.add(new ArrayList<>(path));
             return;
         }
 
-        // 考虑选择当前位置
-        path.add(startIndex);
-        backtracking(n, k, startIndex + 1);
-        path.remove(path.size() - 1);
-        // 考虑不选择当前位置
-        backtracking(n, k, startIndex + 1);
+        for(int i = cur; i < 10; i++) {
+            if(sum + i > n) {
+                break;
+            }
+
+            path.push(i);
 
 
+            dfs(k, n, i + 1, sum + i);
+
+            // 回溯
+            path.pop();
+
+        }
     }
 }
