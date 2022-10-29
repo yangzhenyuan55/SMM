@@ -14,9 +14,8 @@ import java.util.Stack;
  */
 public class LeetCode {
     public static void main(String[] args) {
-        List<List<Integer>> combine = new LeetCode().combinationSum3(3, 7);
-        System.out.println(combine);
-
+        List<List<String>> res = new LeetCode().partition("aab");
+        System.out.println(res);
 
     }
 
@@ -67,38 +66,49 @@ public class LeetCode {
         }
     }
 
-    private List<List<Integer>> res = new ArrayList<>();
-    private Stack<Integer> path = new Stack<>();
+    private List<List<String>> res = new ArrayList<>();
+    private Stack<String> path = new Stack<>();
 
-    public List<List<Integer>> combinationSum3(int k, int n) {
-        dfs(k, n, 1, 0);
+    public List<List<String>> partition(String s) {
+        dfs(s, 0);
         return res;
     }
 
-
-    private void dfs(int k, int n, int cur, int sum) {
-        if(path.size() > k) {
+    /**
+     * @param s 字符串
+     * @param cur 当前字符在字符串的下标
+     */
+    private void dfs(String s, int cur) {
+        if(cur == s.length() - 1) {
+            res.add(new ArrayList(path));
             return;
         }
 
-        if(sum == n && path.size() == k) {
-            res.add(new ArrayList<>(path));
-            return;
-        }
-
-        for(int i = cur; i < 10; i++) {
-            if(sum + i > n) {
-                break;
+        for(int i = cur; i < s.length(); i++) {
+            if(isPalindrome(s, cur, i)) {
+                String str = s.substring(cur, i - cur + 1);
+                path.push(str);
+            } else {
+                continue;
             }
-
-            path.push(i);
-
-
-            dfs(k, n, i + 1, sum + i);
-
-            // 回溯
+            dfs(s, i + 1);
             path.pop();
-
         }
+    }
+
+    // 判断子串是否是回文串
+    private boolean isPalindrome(String s, int l, int r) {
+
+        while(l < r) {
+            if(s.charAt(l) == s.charAt(r)) {
+                l++;
+                r--;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+
     }
 }

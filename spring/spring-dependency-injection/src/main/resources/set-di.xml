@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="orderDaoBean" class="com.example.spring.dao.OrderDao"/>
+
+    <bean id="orderServiceBean" class="com.example.spring.service.OrderService">
+        <!--注入外部bean-->
+        <property name="orderDao" ref="orderDaoBean"/>
+    </bean>
+
+    <!--使用内部bean注入，但是一般使用外部bean的方法-->
+    <bean id="orderServiceBean2" class="com.example.spring.service.OrderService">
+        <property name="orderDao">
+            <bean class="com.example.spring.dao.OrderDao"/>
+        </property>
+    </bean>
+
+    <bean id="userBean" class="com.example.spring.bean.User">
+        <property name="name" value="张三"/>
+        <property name="password" value="12345"/>
+        <property name="age" value="23"/>
+    </bean>
+
+</beans>

@@ -14,18 +14,6 @@
         </encoder>
     </appender>
 
-    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>E:/Java/logs/mybatis.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-
-            <!--格式化输出：%d表示⽇期，%thread表示线程名，%-5level：级别从左显示5
-           个字符宽度%msg：⽇志消息，%n是换⾏符-->
-
-            <pattern>%blue(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %green(%-5level) %boldMagenta(%logger{50}) - %cyan(%msg%n)</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-
 
     <!--mybatis log configure-->
     <logger name="com.apache.ibatis" level="TRACE"/>

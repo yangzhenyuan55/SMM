@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="userDaoBean" class="com.example.spring.dao.UserDao"/>
+    <!--set注入-->
+    <bean id="userServiceBean1" class="com.example.spring.service.UserService">
+        <property name="userDao" ref="userDaoBean"/>
+    </bean>
+
+    <!--构造注入-->
+    <!--index 下标，0指定第一个参数，1第二个参数，一次类推-->
+    <!--也可以根据参数名字来进行注入-->
+    <!--甚至可以什么都不指定，让容器自己进行类型判断，但是有相同类型的参数就不推荐此方法了-->
+    <bean id="userServiceBean2" class="com.example.spring.service.UserService">
+        <constructor-arg index="0" ref="userDaoBean"/>
+    </bean>
+
+</beans>
